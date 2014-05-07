@@ -1,0 +1,40 @@
+/****************************************************************************
+
+
+switchmin.rc
+
+produced by Borland Resource Workshop
+
+
+*****************************************************************************/
+
+#define VERSIONINFO_1	1
+
+VERSIONINFO_1 VERSIONINFO 
+FILEVERSION 1, 0, 0, 0
+PRODUCTVERSION 1, 0, 0, 0
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "CompanyName", "Pat B. Double\000\000"
+   VALUE "FileDescription", "Switching System Library\000"
+   VALUE "FileVersion", "1.00\000\000"
+   VALUE "InternalName", "SwSystem.dll\000"
+   VALUE "LegalCopyright", "Copyright © 1997 Pat B. Double\000\000"
+   VALUE "LegalTrademarks", "Windows(TM) is a trademark of Microsoft Corporation\000"
+   VALUE "OriginalFilename", "swsystem.dll\000"
+  }
+
+ }
+
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x409, 1252
+ }
+
+}
+

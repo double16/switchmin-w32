@@ -1,0 +1,749 @@
+//----------------------------------------------------------------------------
+//  Project SwitchMin
+//  DoubleVision, LTD
+//  Copyright © 1997. All Rights Reserved.
+//
+//  SUBSYSTEM:  SwitchMin Application
+//  FILE:     switchminapp.rc
+//  AUTHOR:     Pat B. Double
+//
+//  OVERVIEW
+//  ~~~~~~~~
+//  All resources defined here.
+//
+//----------------------------------------------------------------------------
+
+#if !defined(WORKSHOP_INVOKED)
+# include <windows.h>
+#endif
+#include "switchminapp.rh"
+
+
+IDM_MDI MENU 
+{
+ POPUP "&File"
+ {
+  MENUITEM "&New", CM_MDIFILENEW
+  MENUITEM "&Open...", CM_MDIFILEOPEN
+  MENUITEM "&Close", CM_FILECLOSE
+  MENUITEM SEPARATOR
+  MENUITEM "&Save", CM_FILESAVE, GRAYED
+  MENUITEM "Save &As...", CM_FILESAVEAS, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "Print Pre&view...", CM_FILEPRINTPREVIEW, GRAYED
+  MENUITEM "&Print...", CM_FILEPRINT, GRAYED
+  MENUITEM "P&rint Setup...", CM_FILEPRINTERSETUP, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "Sen&d...", CM_FILESEND, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "E&xit\tAlt+F4", CM_EXIT
+ }
+
+ MENUITEM SEPARATOR
+ POPUP "&Edit"
+ {
+  MENUITEM "&Undo\tAlt+BkSp", CM_EDITUNDO, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "Cu&t\tShift+Del", CM_EDITCUT, GRAYED
+  MENUITEM "&Copy\tCtrl+Ins", CM_EDITCOPY, GRAYED
+  MENUITEM "&Paste\tShift+Ins", CM_EDITPASTE, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "Clear &All\tCtrl+Del", CM_EDITCLEAR, GRAYED
+  MENUITEM "&Delete\tDel", CM_EDITDELETE, GRAYED
+ }
+
+ MENUITEM SEPARATOR
+ MENUITEM SEPARATOR
+ MENUITEM SEPARATOR
+ POPUP "&Window"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Tile", CM_TILECHILDREN
+  MENUITEM "Arrange &Icons", CM_ARRANGEICONS
+  MENUITEM "C&lose All", CM_CLOSECHILDREN
+ }
+
+ MENUITEM SEPARATOR
+ POPUP "&Help"
+ {
+  MENUITEM "&Contents", CM_HELPCONTENTS
+  MENUITEM "&What's This?", CM_WHATSTHIS
+  MENUITEM "&Using help", CM_HELPUSING
+  MENUITEM SEPARATOR
+  MENUITEM "&About...", CM_HELPABOUT
+ }
+
+}
+
+
+// Accelerator table for short-cut to menu commands. (include/owl/editfile.rc)
+//
+IDM_MDI ACCELERATORS 
+{
+ VK_DELETE, CM_EDITCUT, VIRTKEY, SHIFT
+ VK_INSERT, CM_EDITCOPY, VIRTKEY, CONTROL
+ VK_INSERT, CM_EDITPASTE, VIRTKEY, SHIFT
+ VK_DELETE, CM_EDITCLEAR, VIRTKEY, CONTROL
+ VK_BACK, CM_EDITUNDO, VIRTKEY, ALT
+ VK_F3, CM_EDITFINDNEXT, VIRTKEY
+ VK_F1, CM_WHATSTHIS, VIRTKEY, SHIFT
+ VK_F1, CM_HELPCONTENTS, VIRTKEY
+}
+
+
+// Accelerator table for Print Preview window.
+//
+IDM_PRINTPREVIEW ACCELERATORS
+BEGIN
+  VK_ESCAPE, APX_PPR_DONE, VIRTKEY
+  "c",       APX_PPR_DONE, ALT
+END
+
+
+// Context sensitive help cursor.
+//
+IDC_HELPCURSOR CURSOR "help.cur"
+
+
+// Menu merged in when TEditView is active, notice the extra MENUITEM SEPARATORs which are
+// for menu negotation.  These separators are used as group markers by OWL.
+//
+IDM_EDITVIEW MENU LOADONCALL MOVEABLE PURE DISCARDABLE
+BEGIN
+  MENUITEM SEPARATOR
+
+  POPUP "&Edit"
+  BEGIN
+    MENUITEM "&Undo\aCtrl+Z", CM_EDITUNDO
+    MENUITEM SEPARATOR
+    MENUITEM "&Cut\aCtrl+X", CM_EDITCUT
+    MENUITEM "C&opy\aCtrl+C", CM_EDITCOPY
+    MENUITEM "&Paste\aCtrl+V", CM_EDITPASTE
+    MENUITEM "&Delete\aDel", CM_EDITDELETE
+    MENUITEM "C&lear All\aCtrl+Del", CM_EDITCLEAR
+  END
+
+  POPUP "&Search"
+  BEGIN
+    MENUITEM "&Find...", CM_EDITFIND
+    MENUITEM "&Replace...", CM_EDITREPLACE
+    MENUITEM "&Next\aF3", CM_EDITFINDNEXT
+  END
+
+  MENUITEM SEPARATOR
+
+  MENUITEM SEPARATOR
+
+  MENUITEM SEPARATOR
+
+  MENUITEM SEPARATOR
+END
+
+
+// Menu merged in when TListView is active, notice the extra MENUITEM SEPARATORs which are
+// for menu negotation.  These separators are used as group markers by OWL.
+//
+IDM_LISTVIEW MENU LOADONCALL MOVEABLE PURE DISCARDABLE
+BEGIN
+  MENUITEM SEPARATOR
+
+  POPUP "&Edit"
+  BEGIN
+    MENUITEM "&Undo\aCtrl+Z", CM_EDITUNDO
+    MENUITEM SEPARATOR
+    MENUITEM "&Cut\aCtrl+X", CM_EDITCUT
+    MENUITEM "C&opy\aCtrl+C", CM_EDITCOPY
+    MENUITEM "&Paste\aCtrl+V", CM_EDITPASTE
+    MENUITEM "&Delete\aDel", CM_EDITDELETE
+    MENUITEM "&Add Item\aIns", CM_EDITADD
+    MENUITEM "&Edit Item\aEnter", CM_EDITEDIT
+    MENUITEM "C&lear All\aCtrl+Del", CM_EDITCLEAR
+  END
+
+  MENUITEM SEPARATOR
+
+  MENUITEM SEPARATOR
+
+  MENUITEM SEPARATOR
+
+  MENUITEM SEPARATOR
+END
+
+
+IDM_DOCMANAGERFILE MENU LOADONCALL MOVEABLE PURE DISCARDABLE
+BEGIN
+  MENUITEM "&New", CM_MDIFILENEW
+  MENUITEM "&Open...", CM_MDIFILEOPEN
+  MENUITEM "&Close", CM_FILECLOSE
+  MENUITEM SEPARATOR
+  MENUITEM "&Save", CM_FILESAVE, GRAYED
+  MENUITEM "Save &As...", CM_FILESAVEAS, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "Print Pre&view...", CM_FILEPRINTPREVIEW, GRAYED
+  MENUITEM "&Print...", CM_FILEPRINT, GRAYED
+  MENUITEM "P&rint Setup...", CM_FILEPRINTERSETUP, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "E&xit\tAlt+F4", CM_EXIT
+END
+
+
+// Table of help hints displayed in the status bar.
+//
+STRINGTABLE 
+{
+ -1, "File/document operations"
+ CM_MDIFILENEW, "Creates a new document"
+ CM_MDIFILEOPEN, "Opens an existing document"
+ CM_VIEWCREATE, "Creates a new view for this document"
+ CM_FILEREVERT, "Reverts changes to last document save"
+ CM_FILECLOSE, "Closes the active document"
+ CM_FILESAVE, "Saves the active document"
+ CM_FILESAVEAS, "Saves the active document with a new name"
+ CM_FILEPRINT, "Prints the active document"
+ CM_FILEPRINTERSETUP, "Sets print characteristics for the active document"
+ CM_FILEPRINTPREVIEW, "Displays full pages as read-only"
+ CM_FILESEND, "Sends the active document using electronic mail"
+ CM_EXIT, "Quits SwitchMin and prompts to save the documents"
+ CM_EDITUNDO -1, "Edit operations"
+ CM_EDITUNDO, "Reverses the last operation"
+ CM_EDITCUT, "Cuts the selection and puts it on the Clipboard"
+ CM_EDITCOPY, "Copies the selection and puts it on the Clipboard"
+ CM_EDITPASTE, "Inserts the Clipboard contents at the insertion point"
+ CM_EDITDELETE, "Deletes the selection"
+ CM_EDITCLEAR, "Clears the active document"
+ CM_EDITADD, "Inserts a new line"
+ CM_EDITEDIT, "Edits the current line"
+ CM_EDITFIND -1, "Search/replace operations"
+ CM_EDITFIND, "Finds the specified text"
+ CM_EDITREPLACE, "Finds the specified text and changes it"
+ CM_EDITFINDNEXT, "Finds the next match"
+ CM_CASCADECHILDREN -1, "Window arrangement and selection"
+ CM_CASCADECHILDREN, "Cascades open windows"
+ CM_TILECHILDREN, "Tiles open windows"
+ CM_ARRANGEICONS, "Arranges iconic windows along bottom"
+ CM_CLOSECHILDREN, "Closes all open windows"
+ CM_HELPCONTENTS -1, "Access online help"
+ CM_HELPCONTENTS, "Help table of contents"
+ CM_HELPUSING, "Help on using online Help"
+ CM_HELPABOUT, "About the SwitchMin application"
+ CM_CALCTERMS, "Calculate all terms covering cells in specification"
+ CM_ADDFUNC, "Add a function"
+ CM_DELFUNC, "Delete function"
+ CM_EDITFUNC, "Edit the function"
+ CM_REGISTER, "Register your license by entering the code"
+ CM_WHATSTHIS, "Context Help Cursor"
+}
+
+
+//
+// OWL string table
+//
+
+// EditFile (include/owl/editfile.rc and include/owl/editsear.rc)
+//
+STRINGTABLE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  IDS_CANNOTFIND,       "Cannot find ""%s""."
+  IDS_UNABLEREAD,       "Unable to read file %s from disk."
+  IDS_UNABLEWRITE,      "Unable to write file %s to disk."
+  IDS_FILECHANGED,      "The text in the %s file has changed.\n\nDo you want to save the changes?"
+  IDS_FILEFILTER,       "Text files|*.txt|AllFiles|*.*|"
+END
+
+
+// ListView (include/owl/listview.rc)
+//
+STRINGTABLE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  IDS_LISTNUM,  "Line number %d"
+END
+
+
+// Doc/View (include/owl/docview.rc)
+//
+STRINGTABLE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  IDS_DOCMANAGERFILE,   "&File"
+  IDS_DOCLIST,          "--Document Type--"
+  IDS_VIEWLIST,         "--View Type--"
+  IDS_UNTITLED,         "Document"
+  IDS_UNABLEOPEN,       "Unable to open document."
+  IDS_UNABLECLOSE,      "Unable to close document."
+  IDS_READERROR,        "Document read error."
+  IDS_WRITEERROR,       "Document write error."
+  IDS_DOCCHANGED,       "The document has been changed.\n\nDo you want to save the changes?"
+  IDS_NOTCHANGED,       "The document has not been changed."
+  IDS_NODOCMANAGER,     "Document Manager not present."
+  IDS_NOMEMORYFORVIEW,  "Insufficient memory for view."
+  IDS_DUPLICATEDOC,     "Document already loaded."
+END
+
+// SwitchMin Errors
+//
+STRINGTABLE 
+{
+ IDS_INVALIDVIEW, "Invalid view for operation"
+}
+
+// Printer (include/owl/printer.rc)
+//
+STRINGTABLE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  IDS_PRNON,            " on "
+  IDS_PRNERRORTEMPLATE, "'%s' not printed. %s."
+  IDS_PRNOUTOFMEMORY,   "Out of memory"
+  IDS_PRNOUTOFDISK,     "Out of disk space"
+  IDS_PRNCANCEL,        "Printing canceled"
+  IDS_PRNMGRABORT,      "Printing aborted in Print Manager"
+  IDS_PRNGENERROR,      "Error encountered during print"
+  IDS_PRNERRORCAPTION,  "Print Error"
+END
+
+
+// Exception string resources (include/owl/except.rc)
+//
+STRINGTABLE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  IDS_OWLEXCEPTION,     "ObjectWindows Exception"
+  IDS_UNHANDLEDXMSG,    "Unhandled Exception"
+  IDS_OKTORESUME,       "OK to resume?"
+  IDS_UNKNOWNEXCEPTION, "Unknown exception"
+
+  IDS_UNKNOWNERROR,     "Unknown error"
+  IDS_NOAPP,            "No application object"
+  IDS_OUTOFMEMORY,      "Out of memory"
+  IDS_INVALIDMODULE,    "Invalid module specified for window"
+  IDS_INVALIDMAINWINDOW,"Invalid MainWindow"
+  IDS_VBXLIBRARYFAIL,   "VBX Library init failure"
+
+  IDS_INVALIDWINDOW,    "Invalid window %s"
+  IDS_INVALIDCHILDWINDOW,"Invalid child window %s"
+  IDS_INVALIDCLIENTWINDOW,"Invalid client window %s"
+
+  IDS_CLASSREGISTERFAIL,"Class registration fail for window %s"
+  IDS_CHILDREGISTERFAIL,"Child class registration fail for window %s"
+  IDS_WINDOWCREATEFAIL, "Create fail for window %s"
+  IDS_WINDOWEXECUTEFAIL,"Execute fail for window %s"
+  IDS_CHILDCREATEFAIL,  "Child create fail for window %s"
+
+  IDS_MENUFAILURE,      "Menu creation failure"
+  IDS_VALIDATORSYNTAX,  "Validator syntax error"
+  IDS_PRINTERERROR,     "Printer error"
+
+  IDS_LAYOUTINCOMPLETE, "Incomplete layout constraints specified in window %s"
+  IDS_LAYOUTBADRELWIN,  "Invalid relative window specified in layout constraint in window %s"
+
+  IDS_GDIFAILURE,       "GDI failure"
+  IDS_GDIALLOCFAIL,     "GDI allocate failure"
+  IDS_GDICREATEFAIL,    "GDI creation failure"
+  IDS_GDIRESLOADFAIL,   "GDI resource load failure"
+  IDS_GDIFILEREADFAIL,  "GDI file read failure"
+  IDS_GDIDELETEFAIL,    "GDI object %X delete failure"
+  IDS_GDIDESTROYFAIL,   "GDI object %X destroy failure"
+  IDS_INVALIDDIBHANDLE, "Invalid DIB handle %X"
+END
+
+
+// General Window's status bar messages. (include/owl/statusba.rc)
+//
+STRINGTABLE
+BEGIN
+  IDS_MODES             "EXT|CAPS|NUM|SCRL|OVR|REC"
+  IDS_MODESOFF          "   |  |   |  |   |   "
+  SC_SIZE,              "Changes the size of the window"
+  SC_MOVE,              "Moves the window to another position"
+  SC_MINIMIZE,          "Reduces the window to an icon"
+  SC_MAXIMIZE,          "Enlarges the window to it maximum size"
+  SC_RESTORE,           "Restores the window to its previous size"
+  SC_CLOSE,             "Closes the window"
+  SC_TASKLIST,          "Opens task list"
+  SC_NEXTWINDOW,        "Switches to next window"
+END
+
+
+// Validator messages (include/owl/validate.rc)
+//
+STRINGTABLE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  IDS_VALPXPCONFORM     "Input does not conform to picture:\n""%s"""
+  IDS_VALINVALIDCHAR    "Invalid character in input"
+  IDS_VALNOTINRANGE     "Value is not in the range %ld to %ld."
+  IDS_VALNOTINLIST      "Input is not in valid-list"
+END
+
+
+//
+// Bitmaps used by the speedbar.  Each bitmap is associated with a
+// particular menu command.
+//
+CM_MDIFILENEW BITMAP "new.bmp"
+CM_MDIFILEOPEN BITMAP "open.bmp"
+CM_FILESAVE BITMAP "save.bmp"
+
+CM_EDITUNDO BITMAP "undo.bmp"
+CM_EDITCUT BITMAP "cut.bmp"
+CM_EDITCOPY BITMAP "copy.bmp"
+CM_EDITPASTE BITMAP "paste.bmp"
+
+CM_EDITFIND BITMAP "find.bmp"
+CM_EDITFINDNEXT BITMAP "findnext.bmp"
+
+CM_FILEPRINTPREVIEW  BITMAP "preview.bmp"
+
+CM_HELPCONTENTS BITMAP "help.bmp"
+
+CM_FILEPRINT BITMAP "print.bmp"
+
+
+//
+// Print Preview speed bar bitmaps
+//
+APX_PPR_PREVIOUS BITMAP "previous.bmp"
+APX_PPR_NEXT BITMAP "next.bmp"
+APX_PPR_ONEUP BITMAP "preview1.bmp"
+APX_PPR_TWOUP BITMAP "preview2.bmp"
+APX_PPR_DONE BITMAP "prexit.bmp"
+
+
+//
+// Misc application definitions
+//
+
+// MDI document ICON
+//
+IDI_DOC ICON "mdichild.ico"
+
+// Application ICON
+//
+IDI_MDIAPPLICATION ICON "appldocv.ico"
+
+
+// About box.
+//
+IDD_ABOUT DIALOG 12, 17, 204, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About SwitchMin"
+FONT 8, "MS Sans Serif"
+BEGIN
+  CTEXT "Version", IDC_VERSION, 2, 14, 200, 8, SS_NOPREFIX
+  CTEXT "Switching Function Minimizer", -1, 2, 4, 200, 8, SS_NOPREFIX
+  CTEXT "", IDC_COPYRIGHT, 2, 27, 200, 17, SS_NOPREFIX
+  RTEXT "", IDC_DEBUG, 136, 55, 66, 8, SS_NOPREFIX
+  ICON IDI_MDIAPPLICATION, -1, 2, 2, 34, 34
+  DEFPUSHBUTTON "OK", IDOK, 82, 48, 40, 14
+END
+
+
+// Printer abort box.
+//
+IDD_ABORTDIALOG DIALOG 84, 51, 130, 60
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Printing"
+BEGIN
+  PUSHBUTTON "Cancel", IDCANCEL, 46, 40, 40, 14, WS_TABSTOP
+  CTEXT "Now printing Page %d of", ID_PAGE, 0, 8, 130, 8, SS_CENTER | NOT WS_VISIBLE | WS_GROUP
+  CTEXT "Now printing", -1, 0, 8, 130, 8,
+  CTEXT "'%s' on the", ID_TITLE, 0, 16, 130, 8
+  CTEXT "", ID_PORT, 0, 24, 130, 8, SS_CENTER | NOT WS_VISIBLE | WS_GROUP
+  CTEXT "%s on %s", ID_DEVICE, 0, 24, 130, 8
+END
+
+
+// Version info.
+//
+#if !defined(__DEBUG_)
+
+// Non-Debug VERSIONINFO
+//
+1 VERSIONINFO 
+FILEVERSION 1, 0, 0, 0
+PRODUCTVERSION 1, 0, 0, 0
+FILEFLAGSMASK 0
+FILEFLAGS VS_FFI_FILEFLAGSMASK
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "CompanyName", "Pat B. Double\000"
+   VALUE "FileDescription", "SwitchMin 1.0 for Windows\000"
+   VALUE "FileVersion", "1.0.0.0\000"
+   VALUE "InternalName", "SwitchMin.exe\000"
+   VALUE "LegalCopyright", "Copyright © 1997 Pat B. Double. All Rights Reserved.\000"
+   VALUE "LegalTrademarks", "Windows(TM) is a trademark of Microsoft Corporation\000"
+   VALUE "OriginalFilename", "SwitchMin.exe\000"
+   VALUE "ProductName", "SwitchMin\000"
+   VALUE "ProductVersion", "1.0.0.0\000"
+  }
+
+ }
+
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x0409, 0x04e4
+ }
+
+}
+
+IDD_FUNCSPECGENERAL DIALOG 0, 0, 161, 95
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_FNGENHAZFREE, "button", BS_AUTOCHECKBOX | BS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 56, 4, 12, 9
+ CONTROL "Hazard Free", -1, "static", SS_RIGHT | WS_CHILD | WS_VISIBLE, 4, 4, 44, 9
+}
+
+
+IDD_FUNCSPECFUNCS DIALOG 0, 0, 192, 128
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Functions", IDC_FSFUNCS, "SysListView32", LVS_REPORT | LVS_SORTASCENDING | WS_CHILD | WS_VISIBLE | WS_BORDER, 0, 0, 188, 121, WS_EX_CLIENTEDGE
+}
+
+IDD_FUNCTION DIALOG 0, 0, 253, 116
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS ""
+CAPTION "Function Entry"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Name", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 44, 13
+ CONTROL "ID", IDC_FUNCTION_ID, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 52, 4, 44, 13
+ CONTROL "Description", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 18, 44, 14
+ CONTROL "Description", IDC_FUNCTION_DESC, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 52, 18, 88, 13
+ CONTROL "Specification", IDC_FUNCTION_GRP_SPEC, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 36, 184, 52
+ CONTROL "Mode", IDC_FUNCTION_GRP_MODE, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 192, 36, 52, 52
+ CONTROL "Terms", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 47, 36, 14
+ CONTROL "Terms", IDC_FUNCTION_TERMS, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 48, 47, 132, 14
+ CONTROL "Don't Care", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 65, 40, 13
+ CONTROL "DC", IDC_FUNCTION_DC, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 48, 65, 132, 13
+ CONTROL "DNF", IDC_FUNCTION_DNF, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 52, 36, 13
+ CONTROL "CNF", IDC_FUNCTION_CNF, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 69, 36, 11
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 95, 96, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 184, 96, 50, 14
+ CONTROL "OK", IDOK, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 95, 52, 14
+}
+
+IDM_SPECVIEW MENU 
+{
+ MENUITEM SEPARATOR
+ POPUP "&Edit"
+ {
+  MENUITEM "&Undo\tAlt+BkSp", CM_EDITUNDO
+  MENUITEM SEPARATOR
+  MENUITEM "Cu&t\tCtrl-X", CM_EDITCUT
+  MENUITEM "&Copy\tCtrl+C", CM_EDITCOPY
+  MENUITEM "&Paste\tCtrl-V", CM_EDITPASTE
+  MENUITEM "C&lear All\tCtrl+Del", CM_EDITCLEAR
+  MENUITEM SEPARATOR
+  MENUITEM "&Add Function\tIns", CM_ADDFUNC
+  MENUITEM "&Delete Function\tDel", CM_DELFUNC
+  MENUITEM "&Edit Function", CM_EDITFUNC
+ }
+
+ MENUITEM SEPARATOR
+ POPUP "&Tools"
+ {
+  MENUITEM "&Minimize", CM_SWFMINIMIZE
+  MENUITEM "&Terms Covered", CM_CALCTERMS
+ }
+
+ MENUITEM SEPARATOR
+ MENUITEM SEPARATOR
+ MENUITEM SEPARATOR
+}
+
+
+IDM_SPECVIEW ACCELERATORS 
+{
+ "X", CM_EDITCUT, VIRTKEY, CONTROL
+ "C", CM_EDITCOPY, VIRTKEY, CONTROL
+ "V", CM_EDITPASTE, VIRTKEY, CONTROL
+ VK_INSERT, CM_ADDFUNC, VIRTKEY
+ VK_DELETE, CM_DELFUNC, VIRTKEY
+}
+
+IDM_PRIMEVIEW MENU 
+{
+ MENUITEM SEPARATOR
+ MENUITEM SEPARATOR
+ POPUP "&Tools"
+ {
+  MENUITEM "&Minimize", CM_SWFMINIMIZE
+  MENUITEM "Update &Primes", CM_PRIMESUPDATE
+ }
+
+ MENUITEM SEPARATOR
+ MENUITEM SEPARATOR
+ MENUITEM SEPARATOR
+}
+
+
+STRINGTABLE 
+{
+ CM_PRIMESUPDATE, "Update primes from uncommitted changes"
+ CM_PRIMESPETRICK, "Reduce primes to minimized function(s)"
+ CM_SWFMINIMIZE, "Reduce switching system to minimized function(s)"
+}
+
+IDD_TERMVIEW DIALOG 0, 0, 240, 120
+STYLE DS_3DLOOK | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Show Only Primes", IDC_PRIMESONLY, "button", BS_CHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 4, 92, 13
+ CONTROL "Terms", IDC_TERMVIEWLIST, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 22, 236, 98
+}
+
+IDB_PRINTHEADER BITMAP "printlogo.bmp"
+
+IDD_CALCCOVERAGE DIALOG 0, 0, 185, 57
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Calculating Coverage Terms"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Mode", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 40, 12
+ CONTROL "Term", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 20, 40, 11
+ CONTROL "Calc Coverage Progress", IDC_CALCCOVPROGRESS, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 36, 176, 17
+ CONTROL "Current Mode", IDC_CALCCOVMODE, "static", SS_LEFT | SS_SUNKEN | WS_CHILD | WS_VISIBLE, 52, 4, 32, 12
+ CONTROL "Current Term", IDC_CALCCOVTERM, "static", SS_LEFT | SS_SUNKEN | WS_CHILD | WS_VISIBLE, 52, 20, 128, 13
+}
+
+
+IDB_TB_ADDFUNC BITMAP "addfunc.bmp"
+
+
+IDB_TB_DELFUNC BITMAP "delfunc.bmp"
+
+IDD_MINFUNC DIALOG 0, 0, 128, 174
+STYLE DS_3DLOOK | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "FnList", IDC_MINFUNCFNLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 4, 120, 76
+ CONTROL "Design", IDC_MINFUNCDSNGRP, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 84, 120, 66
+ CONTROL "Boolean Expression", IDC_MINFUNCBOOL, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 96, 104, 9
+ CONTROL "AND/OR", IDC_MINFUNCANDOR, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 109, 104, 9
+ CONTROL "NAND", IDC_MINFUNCNAND, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 122, 104, 9
+ CONTROL "NOR", IDC_MINFUNCNOR, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 135, 104, 9
+ CONTROL "Zoom In", IDC_MINFUNCZIN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 156, 56, 12
+ CONTROL "Zoom Out", IDC_MINFUNCZOUT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 72, 156, 52, 13
+}
+
+IDD_MINFUNCBUILD DIALOG 0, 0, 168, 153
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_THICKFRAME
+CAPTION "Minimizing Functions..."
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Primes Left", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 52, 48, 8
+ CONTROL "Columns Left", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 64, 48, 10
+ CONTROL "Messages", IDC_MINFNBLDMSGS, "listbox", LBS_NOSEL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 4, 87, 160, 65
+ CONTROL "Primes", IDC_MINFUNCBLDPRIMES, "static", SS_LEFT | SS_SUNKEN | WS_CHILD | WS_VISIBLE, 56, 52, 48, 9
+ CONTROL "Columns", IDC_MINFUNCBLDCOLS, "static", SS_LEFT | SS_SUNKEN | WS_CHILD | WS_VISIBLE, 56, 64, 48, 9
+ CONTROL "Messages:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 76, 48, 9
+ CONTROL "", IDC_MINFUNCBLDSTATUS, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 160, 8
+ CONTROL "Progress", IDC_MINFNPROGRESS, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 17, 160, 13
+ CONTROL "Details", IDC_MINFNDETAILS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 116, 34, 48, 13
+}
+
+IDD_COSTTYPE DIALOG 0, 0, 308, 129
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Cost Type"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 40, 112, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 112, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 218, 112, 50, 14
+ CONTROL "Enter the cost criteria you wish to use for minimizaton.  You may select more than one.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 300, 20
+ CONTROL "Inputs", IDC_COSTINPUTS, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 28, 60, 13
+ CONTROL "Literals ", IDC_COSTLITERALS, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 56, 60, 13
+ CONTROL "Terms/Gates", IDC_COSTTERMS, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 80, 60, 13
+ CONTROL "Each input to a gate is given a cost of 1. Recommended for IC design.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 72, 28, 164, 16
+ CONTROL "Each input to a first level gate is given a cost of 1.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 72, 56, 164, 17
+ CONTROL "Each term is given a cost of 1.  Reduces number of gates used. Recommended for breadboarding.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 72, 80, 164, 16
+ CONTROL "DNF", IDC_COSTTYPEINPUTDNF, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 28, 52, 9
+ CONTROL "CNF", IDC_COSTTYPEINPUTCNF, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 39, 52, 9
+ CONTROL "CNF", IDC_COSTLITERALSCNF, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 66, 52, 9
+ CONTROL "DNF", IDC_COSTLITERALSDNF, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 56, 52, 9
+ CONTROL "CNF", IDC_COSTTERMSCNF, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 92, 52, 9
+ CONTROL "DNF", IDC_COSTTERMSDNF, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 82, 52, 10
+ CONTROL "Frame1", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 0, 26, 304, 26
+ CONTROL "Frame2", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 0, 52, 304, 26
+ CONTROL "Frame3", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 0, 78, 304, 30
+}
+
+
+
+
+
+
+
+
+IDD_INPUTS DIALOG 0, 0, 125, 75
+STYLE DS_3DLOOK | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "InputsGrid", IDC_INPUTGRID, "button", BS_OWNERDRAW | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 4, 116, 65
+}
+
+
+IDI_DESC ICON "description.ico"
+IDI_INPUTS ICON "inputs.ico"
+IDI_OUTPUTS ICON "outputs.ico"
+IDI_OPTIONS ICON "options.ico"
+IDI_DNF ICON "dnf.ico"
+IDI_CNF ICON "cnf.ico"
+
+CM_WHATSTHIS BITMAP "whatsthis.bmp"
+
+IDB_GLY_OK BITMAP "..\Resources\Glyphs\ok.bmp"
+IDB_GLY_YES BITMAP "..\Resources\Glyphs\yes.bmp"
+IDB_GLY_CANCEL BITMAP "..\Resources\Glyphs\cancel.bmp"
+IDB_GLY_HELP BITMAP "..\Resources\Glyphs\help.bmp"
+IDB_GLY_NO BITMAP "..\Resources\Glyphs\no.bmp"
+IDB_GLY_BROWSE BITMAP "..\Resources\Glyphs\browse.bmp"
+
+
+
+#else
+
+// Debug VERSIONINFO
+//
+1 VERSIONINFO LOADONCALL MOVEABLE
+FILEVERSION 1, 0, 0, 0
+PRODUCTVERSION 1, 0, 0, 0
+FILEFLAGSMASK VS_FF_DEBUG | VS_FF_PRERELEASE | VS_FF_PATCHED | VS_FF_PRIVATEBUILD | VS_FF_SPECIALBUILD
+FILEFLAGS VS_FFI_FILEFLAGSMASK
+#if defined(BI_PLAT_WIN32)
+FILEOS VOS__WINDOWS32
+#else
+FILEOS VOS__WINDOWS16
+#endif
+FILETYPE VFT_APP
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    // Language type = U.S. English(0x0409) and Character Set = Windows, Multilingual(0x04e4)
+    BLOCK "040904E4"              // Matches VarFileInfo Translation hex value.
+    BEGIN
+      VALUE "CompanyName", "DoubleVision, LTD\000"
+      VALUE "FileDescription", "SwitchMin for Windows\000"
+      VALUE "FileVersion", "1.0\000"
+      VALUE "InternalName", "SwitchMin\000"
+      VALUE "LegalCopyright", "Copyright © 1997. All Rights Reserved.\000"
+      VALUE "LegalTrademarks", "Windows(TM) is a trademark of Microsoft Corporation\000"
+      VALUE "OriginalFilename", "SwitchMin.exe\000"
+      VALUE "ProductName", "SwitchMin\000"
+      VALUE "ProductVersion", "1.0\000"
+      VALUE "SpecialBuild", "Debug Version\000"
+      VALUE "PrivateBuild", "Built by Pat B. Double\000"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 0x04e4    // U.S. English(0x0409) & Windows Multilingual(0x04e4) 1252
+  END
+END
+
+#endif

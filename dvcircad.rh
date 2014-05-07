@@ -1,0 +1,14 @@
+//
+// DVCIRCAD.DLL
+//
+//  Circuit CAD Library
+//
+// Resource header file
+//
+
+//#ifndef DVCIRCAD_RH
+//#define DVCIRCAD_RH
+
+
+//#endif
+#define VERSIONINFO_1	1
